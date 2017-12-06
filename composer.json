@@ -4,11 +4,7 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-4": {
-            "AppBundle\\": "src/AppBundle",
-            "BackendBundle\\": "src/BackendBundle",
-            "FrontendBundle\\": "src/FrontendBundle"
-        },
+        "psr-4": { "": "src/" },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "autoload-dev": {
@@ -19,6 +15,7 @@
         "php": ">=5.5.9",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "friendsofsymfony/user-bundle": "~2.0",
         "incenteev/composer-parameter-handler": "^2.0",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",

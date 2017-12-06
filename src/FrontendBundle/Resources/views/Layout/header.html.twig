@@ -1,0 +1,125 @@
+{% block header %}
+
+<style>
+
+	.container{
+		width: 100%;
+	}
+	#title{
+		color: #2e75b5;
+		font-weight: bold;
+		text-align: left;
+	}
+	#header {
+		height: 90px;
+	}&
+	#header h1{
+		margin: 0px;
+	}
+	#header_left{		
+		/*background: green;*/
+		display: flex;
+		align-items: flex-start;
+		height: inherit;
+	}
+	#header_left a{
+		text-decoration: none;		
+	}
+	#header_right{
+		display: flex;
+		flex-direction: column;		
+		align-items: flex-end;
+		/*background: red;*/
+		height: inherit;		
+	}
+	#header_low{
+		background: #2e75b5;
+		display: flex;
+	}
+	#header_low a{
+		color: white;
+		font-weight: bold;
+	}
+	#header_low a:hover{
+		background: #2e3a47;		
+	}
+	#user_menu{
+		/*background: yellow;*/
+		display: flex;
+		justify-content: flex-end;		
+		position: relative;
+		width: 320px;
+		float: right;
+		margin: 0px;		
+	}
+	.dropdown-menu{
+		top: 65%;
+	}
+	.container{
+		padding: 0px;
+	}
+	#search{
+		background: #2e75b5;
+		height: 50px;
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	}
+
+</style>
+
+<div id="header" class="row">
+	
+	<div id="header_left" class="col-lg-5">
+		<a href="#">
+			<h1 id="title"> Ecommerce <img src= "{{asset ('pictures/logo.png')}}" style="width: 150px"/></h1>				
+		</a>
+	</div>
+
+	<div id="header_right" class="col-lg-7">
+
+		<div id="user_menu" class="container">
+			<ul class="nav navbar-nav" >			
+				<a href="#"><button id="order_detail" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Panier </button></a>	
+			</ul>	
+					
+		</div>
+	</div>		
+</div>
+<div class="row">
+	<div id="header_low" class="col-lg-8">
+		<nav class="horizontal_menu">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav">
+	                <li role="presentation">
+	                    <a href="#"> Kits </a>
+	                </li>
+	                <li role="presentation">
+	                    <a href="#"> Electroniques </a>
+	                </li>
+	                	<li role="presentation">
+	                    <a href="#"> Pièces </a>
+	                </li>
+	               	<li role="presentation">
+	                    <a href="#"> Consommables </a>
+	                </li>	                             
+        		</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div id="search" class="col-lg-4">
+		<form action="#" method="GET" >	
+	    	<div id="input_search" class="input-group">	    	
+		    	<input name="research_product" type="text" class="form-control" placeholder="Recherche par mot clés ou numéro de produit">
+		     		<span class="input-group-btn">
+		        		<button id="button_research" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+		     		</span>
+	     		</input>	     	     	
+	    	</div>
+	    </form>	
+	</div>
+	
+</div>
+
+{% endblock %}

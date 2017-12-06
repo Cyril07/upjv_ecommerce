@@ -1,0 +1,71 @@
+{% block footer %}
+<style>
+    #payment{
+        background: white;
+        text-align: center;        
+    }
+    #payment img{
+        height: 50px;
+        opacity: 0.5;
+        margin: 10px;
+    }
+    #copyrigh{
+        text-align: center;
+        font-weight: bold;
+        color: white;
+    }
+    .container{    
+        color: white;
+    }
+    #footer{
+        background: #2e75b5;
+
+    }
+    #footer a{
+        color: white;
+        font-weight: bold;
+    }
+    #footer a:hover{
+        background: #2e3a47;        
+    }
+
+</style>
+
+<div id="footer" class="co-lg-12">
+    <nav class="horizontal_menu">
+        <div class="container co-lg-12">
+            <ul class="nav navbar-nav">
+                <li role="presentation">
+                    <a href="#"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+Qui sommes-nous ? </a>
+                </li>
+                <li role="presentation">
+                    <a href="#"> <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+Conditions générales de vente </a>
+                </li>
+                    <li role="presentation">
+                    <a href="#"> <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+Contactez-nous </a>
+                </li>
+                <li role="presentation">
+                    <a href="#"> <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+Livraison </a>
+                </li>
+            </ul>
+
+        </div>        
+    </nav>
+
+    <div id="payment" class="col-lg-12">
+        <img src= "{{asset ('pictures/paypal.png')}}"/>
+        <img src= "{{asset ('pictures/CB.png')}}"/>
+        <img src= "{{asset ('pictures/visa-mastercard.png')}}"/>
+        <img src= "{{asset ('pictures/colissimo.png')}}"/>
+    </div>
+
+    <div id="copyright">         
+         <span><a href="#">Admin</a></span>
+         <span>Copyright © 2017 - RC Electric Car</span>
+    </div>
+</div>
+{% endblock %}

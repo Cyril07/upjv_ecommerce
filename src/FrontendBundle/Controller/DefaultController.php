@@ -12,15 +12,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('FrontendBundle:Default:index.html.twig');
-    }
-
-    /**
-     * @Route("/lol")
-     */
-    public function lolAction()
-    {
-        return $this->render('FrontendBundle:Default:lol.html.twig');
+        return $this->render('FrontendBundle::index.html.twig');
     }
 
 }
