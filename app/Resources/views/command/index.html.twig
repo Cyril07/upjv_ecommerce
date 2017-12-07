@@ -1,0 +1,41 @@
+{% extends 'BackendBundle:Layout:backend.html.twig' %}
+
+{% block body %}
+    <h1>Commands list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Datecommand</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for command in commands %}
+            <tr>
+                <td><a href="{{ path('command_show', { 'id': command.id }) }}">{{ command.id }}</a></td>
+                <td>{% if command.dateCommand %}{{ command.dateCommand|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if command.status %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('command_show', { 'id': command.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('command_edit', { 'id': command.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('command_new') }}">Create a new command</a>
+        </li>
+    </ul>
+{% endblock %}

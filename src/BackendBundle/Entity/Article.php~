@@ -38,6 +38,13 @@ class Article
     /**
      * @var int
      *
+     * @ORM\Column(name="price", type="decimal")
+     */
+    private $price;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="stock", type="integer")
      */
     private $stock;
@@ -50,10 +57,11 @@ class Article
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Scale")
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $scale;
-
+    private $active;
 
     /**
      * Get id
@@ -160,5 +168,76 @@ class Article
     {
         return $this->description;
     }
-}
 
+    /**
+     * Set stock
+     *
+     * @param integer $stock
+     *
+     * @return Article
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
+     * @return integer
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     *
+     * @return Article
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return Article
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+}

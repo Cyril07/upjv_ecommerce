@@ -1,0 +1,22 @@
+{% extends 'BackendBundle:Layout:backend.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-10">
+
+    <h1>Ajout d'articles</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Ajout" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('article_index') }}">Back to the list</a>
+        </li>
+    </ul>
+
+</div>
+
+{% endblock %}

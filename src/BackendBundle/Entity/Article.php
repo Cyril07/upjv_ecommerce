@@ -38,6 +38,13 @@ class Article
     /**
      * @var int
      *
+     * @ORM\Column(name="price", type="decimal")
+     */
+    private $price;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="stock", type="integer")
      */
     private $stock;
@@ -45,9 +52,16 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
 
     /**
      * Get id
@@ -177,5 +191,53 @@ class Article
     public function getStock()
     {
         return $this->stock;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     *
+     * @return Article
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return Article
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }

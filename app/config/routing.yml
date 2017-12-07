@@ -1,3 +1,15 @@
+backend_user:
+    resource: "@BackendBundle/Controller/UserController.php"
+    type:     annotation
+
+backend_command:
+    resource: "@BackendBundle/Controller/CommandController.php"
+    type:     annotation
+
+backend_article:
+    resource: "@BackendBundle/Controller/ArticleController.php"
+    type:     annotation
+
 frontend:
     resource: "@FrontendBundle/Controller/"
     type:     annotation

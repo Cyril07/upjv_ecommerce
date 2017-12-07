@@ -1,0 +1,51 @@
+{% extends 'BackendBundle:Layout:backend.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-10">
+
+    <h1>Produits</h1>
+
+    <a href="{{ path('article_new') }}"><button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><b> Ajouter un produit</b>
+    </button></a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Référence</th>
+                <th>Désignation</th>
+                <th>Stock</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
+                <td>{{ article.reference }}</td>
+                <td>{{ article.wording }}</td>
+                <td>{{ article.stock }}</td>
+                <td>{{ article.description }}</td>
+                <td>{{ article.price }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('article_show', { 'id': article.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('article_edit', { 'id': article.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+
+{% endblock %}

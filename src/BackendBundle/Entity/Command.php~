@@ -103,5 +103,52 @@ class Command
     {
         return $this->status;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \BackendBundle\Entity\User $user
+     *
+     * @return Command
+     */
+    public function setUser(\BackendBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \BackendBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set basket
+     *
+     * @param \BackendBundle\Entity\Basket $basket
+     *
+     * @return Command
+     */
+    public function setBasket(\BackendBundle\Entity\Basket $basket = null)
+    {
+        $this->basket = $basket;
+
+        return $this;
+    }
+
+    /**
+     * Get basket
+     *
+     * @return \BackendBundle\Entity\Basket
+     */
+    public function getBasket()
+    {
+        return $this->basket;
+    }
+}
