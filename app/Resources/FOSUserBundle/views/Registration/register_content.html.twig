@@ -1,0 +1,48 @@
+{% extends "FrontendBundle:Layout:frontend.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+<style>
+    #register{
+        display: block;
+        color: #2e75b5;
+        font-weight: normal;
+        margin: 30px 30px;
+    }
+    #submit_registration{
+        margin-top: 20px;
+    }
+    #register label{
+    	display: block;
+    }
+    .jumbotron h1{
+        color: #024d90;
+    }
+    #submit_register{
+        margin-top: 20px;
+    }
+    input{
+	    color: #2e75b5;    
+	    background-color: #fff;
+	    border: 1px solid #ccc;
+	    border-radius: 4px;
+    }
+
+</style>
+
+<div id="register" class="jumbotron">
+    
+    <h1> Création de compte </h1>
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    {{ form_widget(form) }}
+    <div>
+    	<input id="submit_register" type="submit" value="{{ 'registration.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}
+
+</div>
+
+{% endblock %}

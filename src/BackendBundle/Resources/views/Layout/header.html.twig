@@ -26,10 +26,25 @@
 
 <div class="col-lg-2"> 
   <ul class="nav nav-pills nav-stacked">
-    <li role="presentation" class="active"><a href="{{ path('article_index') }}">Produits</a></li>
-    <li role="presentation"><a href="{{ path('user_index') }}">Clients</a></li>
-    <li role="presentation"><a href="{{ path('command_index') }}">Commandes</a></li>
+    <li class="menu" role="presentation" class="active"><a href="{{ path('article_index') }}">Produits</a></li>
+    <li class="menu" role="presentation"><a href="{{ path('user_index') }}">Clients</a></li>
+    <li class="menu" role="presentation"><a href="{{ path('command_index') }}">Commandes</a></li>
   </ul>
 </div>
+
+
+{% block javascript %}
+<script>
+
+$(".menu").click(function(){
+  $("li").removeClass("active");
+  $(this).addClass("active");
+  
+});
+
+
+</script>
+
+{% endblock %}
 
 {% endblock %}

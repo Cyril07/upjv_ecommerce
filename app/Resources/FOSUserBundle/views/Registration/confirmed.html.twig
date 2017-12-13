@@ -1,0 +1,30 @@
+{% extends "FrontendBundle:Layout:frontend.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+<style>
+    #confirmed_account{
+        display: block;
+        color: #2e75b5;
+        font-weight: normal;
+        margin: 30px 30px;
+    }
+    .jumbotron h1{
+        color: #024d90;
+    }
+</style>
+
+<div id="confirmed_account" class="jumbotron">
+	<h1>Confirmation</h1>
+	
+	<p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    {% if targetUrl %}
+    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

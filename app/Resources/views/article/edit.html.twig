@@ -1,6 +1,8 @@
 {% extends 'BackendBundle:Layout:backend.html.twig' %}
 
 {% block body %}
+
+<div class="col-lg-10">
     <h1>Article edit</h1>
 
     {{ form_start(edit_form) }}
@@ -18,4 +20,6 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+</div>
+
 {% endblock %}

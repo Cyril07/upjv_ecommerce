@@ -1,0 +1,71 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<style>
+    .login{
+        display: block;
+        color: #2e75b5;
+        font-weight: normal;
+        margin: 30px 30px;
+        height: 430px;
+    }
+    #submit{
+        color: #2e75b5;    
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px
+    }
+    .jumbotron h1{
+        color: #024d90;
+    }
+    #forget_password{
+        margin-top: 20px;
+    }
+
+</style>
+
+
+<div class="row col-lg-12" id="dialog">
+
+{% if error %}
+    <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+    <div id="log" class="jumbotron login">
+        <h1> Connexion </h1>
+
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur</label>
+                <input class="form-control" type="text" type="text" id="username" name="_username" value="{{ last_username }}" required="required"/>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input class="form-control" type="password" id="password" name="_password" required="required"/>
+            </div>
+
+            <div class="form-group">
+                <label for="remember_me">Se souvenir de moi ?</label>
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+            </div>
+
+            <button type="submit" class="btn btn-default" id="submit" name="submit">Se connecter</button>
+
+            <div id="forget_password">
+                <a href="{{ path('fos_user_resetting_request') }}" ><u>Mot de passe oublié ?</u></a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% block javascripts %}
+<script>
+
+//$(this).dialog('open');
+
+</script>
+{% endblock %}

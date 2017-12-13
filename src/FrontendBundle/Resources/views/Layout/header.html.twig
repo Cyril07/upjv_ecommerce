@@ -87,27 +87,18 @@
 	</div>		
 </div>
 <div class="row">
-	<div id="header_low" class="col-lg-8">
+	<div id="header_low" class="col-lg-12">
 		<nav class="horizontal_menu">
 			<div class="container-fluid">
 				<ul class="nav navbar-nav">
 	                <li role="presentation">
-	                    <a href="#"> Kits </a>
-	                </li>
-	                <li role="presentation">
-	                    <a href="#"> Electroniques </a>
-	                </li>
-	                	<li role="presentation">
-	                    <a href="#"> Pièces </a>
-	                </li>
-	               	<li role="presentation">
-	                    <a href="#"> Consommables </a>
-	                </li>	                             
+	                    <a href="{{ path('article_presentation') }}"> Produits </a>
+	                </li>                             
         		</ul>
 			</div>
 		</nav>
 	</div>
-
+<!--
 	<div id="search" class="col-lg-4">
 		<form action="#" method="GET" >	
 	    	<div id="input_search" class="input-group">	    	
@@ -119,7 +110,7 @@
 	    	</div>
 	    </form>	
 	</div>
-	
+-->
 </div>
 
 {% endblock %}

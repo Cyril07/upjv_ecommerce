@@ -5,7 +5,8 @@ namespace BackendBundle\Controller;
 use BackendBundle\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Article controller.
@@ -20,11 +21,23 @@ class ArticleController extends Controller
      * @Route("/", name="article_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $articles = $em->getRepository('BackendBundle:Article')->findAll();
+        $query = $em->createQuery(
+            'SELECT a
+            FROM BackendBundle:Article a
+            ORDER BY a.id'
+        );
+
+        $paginator = $this->get('knp_paginator');
+
+        $articles = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 1)/*limit per page*/
+        );
 
         return $this->render('article/index.html.twig', array(
             'articles' => $articles,

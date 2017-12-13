@@ -1,0 +1,43 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<style>
+    .forget_password{
+        display: block;
+        color: #2e75b5;
+        font-weight: normal;
+        margin: 30px 30px;
+    }
+    #submit{
+        color: #2e75b5;    
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px
+    }
+    .jumbotron h1{
+        color: #024d90;
+    }
+    #reset{
+    	padding: 0px;
+    }
+
+
+</style>
+
+<div class="row">
+    <div id="forget_password" class="jumbotron col-lg-11 forget_password">
+    	<h1>Mot de passe oublié ?</h1>
+
+		<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+			<div class="row">
+			    <div class="form-group col-lg-5" id="reset">
+			        <label for="username">{{ 'resetting.request.username'|trans }}</label>
+
+			        <input class="form-control" type="text" id="username" name="username" required="required" />
+			    </div>
+			</div>
+		    </form>
+		    	<button type="submit" class="btn btn-default" id="submit" name="submit">Rénitialiser</button>
+		    </div>
+		</form>
+	</div>
+</div>

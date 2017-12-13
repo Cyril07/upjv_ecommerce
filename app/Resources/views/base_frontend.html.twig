@@ -6,6 +6,8 @@
         <title>{% block title %}Ecommerce{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.css') }}">
+        <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     </head>
 
     <style>
@@ -22,8 +24,14 @@
                 {% block header %}{% endblock %}
             </div>
 
+            s<div class="row">
+                {% block content %}
+                    {% block fos_user_content %}{% endblock %}
+                {% endblock %}
+            </div>
+
             <div class="row">
-                {% block body %}{% endblock %}
+                {% block body %}{% endblock %}                
             </div>
 
             <div class="row">
@@ -31,7 +39,7 @@
             </div>
 
         </div>
-
+        {% block javascript %}{% endblock %}
     </body>
 
 </html>
