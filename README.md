@@ -49,7 +49,7 @@ Lien en bas de page, ouvrant une boite de dialogue pour l'authentification, bouc
 
 Après authentification, arrivé sur page avec la liste des commandes à traiter (non livrées)
 
-Menu à gauche : [ produits, clients, commandes]
+Menu à gauche : [ produits, clients, commandes ]
 
 
 Le commerçant ajoute un produit

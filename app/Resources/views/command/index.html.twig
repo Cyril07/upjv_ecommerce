@@ -1,9 +1,28 @@
 {% extends 'BackendBundle:Layout:backend.html.twig' %}
 
 {% block body %}
-    <h1>Commands list</h1>
 
-    <table>
+<style>
+  .current{
+    color: #083b72;
+  }
+</style>
+
+<div class="col-lg-10">
+
+
+    <h1>Commandes</h1>
+
+    <div class="filter_select" > Trier par : 
+        <select id="filter">
+          <option value="a.active = 0">Non livré</option>
+          <option value="a.active = 1">Livré</option>
+          <option value="a.date">Date</option>
+          <option value="a.client">Client</option>
+        </select>
+    </div>
+
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -33,9 +52,4 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('command_new') }}">Create a new command</a>
-        </li>
-    </ul>
 {% endblock %}

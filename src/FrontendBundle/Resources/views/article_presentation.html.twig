@@ -39,6 +39,15 @@
   .current{
     color: #083b72;
   }
+  .filter_select, #price{
+      color : #2e75b5;
+      font-weight: bold;
+  }
+  #remaining_piece{
+    font-size: 15px;
+    color : #333;
+    font-style: italic;
+  }
 
 
 </style>
@@ -47,7 +56,14 @@
 
 	<img src="{{ asset( 'pictures/article.png') }}" style="height: 150px"alt="...">
 	<h1>Produits</h1>    
-	<p> Veuillez trouver ci-dessous l'ensemble des produits disponible sur notre site </p>    
+	<p> Veuillez trouver ci-dessous l'ensemble des produits disponible sur notre site </p>
+  <div class="filter_select" > Trier par : 
+    <select id="filter">
+      <option value="a.price">Prix</option>
+      <option value="a.wording">Désignation</option>
+      <option value="a.stock">Disponibilité</option>
+    </select>
+  </div>
 
 </div>
 
@@ -57,35 +73,37 @@
 			<div id="item_of_article" class="col-lg-3">      
 				<div class="thumbnail">
 					<a href='#'>
-						<img src="#" style="height: 150px"alt="...">
+						<img src="{{ asset( 'pictures/no-image.png') }}" style="height: 150px"alt="...">
 							<div class="caption">        
 								<h3>{{ article.wording }}</h3>
 							</div>
 					</a>       
-					<p>{{ article.price }}€</p>
+					<p id="price">{{ article.price }}€</p>
 				<p>
 					{% if article.stock > 0 %}
 
-					<button id="" product_id="{{ article.id }}" type="button" class="btn btn-primary order_detail_add">
-						<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-					</button>
-
+					<a href="{{ path('add', {'id' : article.id }) }}">
+						<button  article_id="{{ article.id }}" type="button" class="btn btn-primary add_basket" >
+							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+						</button>
+					</a>
 					{% else %}
 
 					<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="En cours de réapprovisionnement">
 						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               		</button>
 
-          {% endif %}
+          			{% endif %}
 
 				</p>
+        <p id="remaining_piece">Pièces restantes : {{ article.stock }}</p>
 				</div>
 			</div>
 
 	{% endif %}
 	{% endfor %}
 
-  <div class="navigation text-center">
+  <div class="navigation text-center col-lg-12">
     {{ knp_pagination_render(articles) }}
   </div>
 
@@ -93,13 +111,48 @@
 
 {% endblock %}
 
+
 {% block javascript %}
+
 <script>
 
+//bulle d'info : product.quantity = 0 : pas de stock
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
-})
+});
+
+//récupération donnée du filtre
+
+$(".filter_select").click(function(){
+  //console.log($("#filter option:selected").attr("value"));
+
+  $.ajax({
+    url: "{{ path('article_presentation') }}",
+    type: "POST",
+    data: { filter: $("#filter option:selected").attr("value")
+    },
+
+    sucess: function(data) {
+      console.log(data);
+    }
+  })
+
+});
+
+// panier
+{#$(".add_basket").click(function(){#}
+  {#console.log("ajout au panier de : "+$(this).attr("article_id"));#}
+
+  {#$.ajax({#}
+	  {#url: "{{ path ('add') }}",#}
+	  {#type: "POST",#}
+	  {#data: { article_id: $(this).attr("article_id")}#}
+  {#})#}
+
+{#})#}
 
 </script>
+
 {% endblock %}
+
 

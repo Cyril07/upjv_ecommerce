@@ -1,3 +1,7 @@
+backend_customer:
+    resource: "@BackendBundle/Controller/CustomerController.php"
+    type:     annotation
+
 backend_user:
     resource: "@BackendBundle/Controller/UserController.php"
     type:     annotation

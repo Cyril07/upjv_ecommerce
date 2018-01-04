@@ -36,20 +36,20 @@ class Command
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Customer")
      */
-    private $user;
+    private $customer;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Basket")
-     */
-    private $basket;
+
+    public function __toString() {
+        return $this->customer;
+    }
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -97,7 +97,7 @@ class Command
     /**
      * Get status
      *
-     * @return bool
+     * @return boolean
      */
     public function getStatus()
     {
@@ -105,50 +105,26 @@ class Command
     }
 
     /**
-     * Set user
+     * Set customer
      *
-     * @param \BackendBundle\Entity\User $user
+     * @param \BackendBundle\Entity\Customer $customer
      *
      * @return Command
      */
-    public function setUser(\BackendBundle\Entity\User $user = null)
+    public function setCustomer(\BackendBundle\Entity\Customer $customer = null)
     {
-        $this->user = $user;
+        $this->customer = $customer;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get customer
      *
-     * @return \BackendBundle\Entity\User
+     * @return \BackendBundle\Entity\Customer
      */
-    public function getUser()
+    public function getCustomer()
     {
-        return $this->user;
-    }
-
-    /**
-     * Set basket
-     *
-     * @param \BackendBundle\Entity\Basket $basket
-     *
-     * @return Command
-     */
-    public function setBasket(\BackendBundle\Entity\Basket $basket = null)
-    {
-        $this->basket = $basket;
-
-        return $this;
-    }
-
-    /**
-     * Get basket
-     *
-     * @return \BackendBundle\Entity\Basket
-     */
-    public function getBasket()
-    {
-        return $this->basket;
+        return $this->customer;
     }
 }

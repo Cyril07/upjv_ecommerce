@@ -20,28 +20,31 @@ class DefaultController extends Controller
     /**
 	 * @Route("/article", name="article_presentation")
 	 */
-	public function articles_pageAction (Request $request)
+	public function article_pageAction (Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 
-        $query = $em->createQuery(
-            'SELECT a
-            FROM BackendBundle:Article a
-            WHERE a.active = 1
-            ORDER BY a.id');
 
+        if ($filter = $request->request->get('filter') == null)
+        {
+            $filter ='a.id';
+        }
+
+        $query = $em->getRepository('BackendBundle:Article')->pagination($filter);
 
         $paginator = $this->get('knp_paginator');
 
+        //var_dump($filter);die;
         $articles = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            $request->query->getInt('limit', 1)/*limit per page*/
+            $request->query->getInt('limit', 4)/*limit per page*/
         );
-		
+
 		return $this->render('FrontendBundle::article_presentation.html.twig', array(
             'articles' => $articles,
         ));
 	}
 
 }
+

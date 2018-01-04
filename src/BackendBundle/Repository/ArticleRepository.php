@@ -10,4 +10,25 @@ namespace BackendBundle\Repository;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function pagination($filter)
+	{
+        $query = $this->createQueryBuilder('a')
+            ->select('a')
+            ->where ('a.active = 1')
+            ->orderby($filter);
+            //->addOrderBy($filter);
+    
+    return $query;
+
+	}
+
+    public function findArray($array)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a') 
+            ->where ('a.id IN (:array)')
+            ->setParameter('array', $array);
+
+        return $qb->getQuery()->getResult(); 
+    }
 }

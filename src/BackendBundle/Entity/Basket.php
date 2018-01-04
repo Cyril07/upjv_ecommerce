@@ -33,11 +33,16 @@ class Basket
      */
     private $article;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Command")
+     */
+    private $command;
+
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -61,7 +66,7 @@ class Basket
     /**
      * Get quantity
      *
-     * @return int
+     * @return integer
      */
     public function getQuantity()
     {
@@ -90,5 +95,29 @@ class Basket
     public function getArticle()
     {
         return $this->article;
+    }
+
+    /**
+     * Set command
+     *
+     * @param \BackendBundle\Entity\Command $command
+     *
+     * @return Basket
+     */
+    public function setCommand(\BackendBundle\Entity\Command $command = null)
+    {
+        $this->command = $command;
+
+        return $this;
+    }
+
+    /**
+     * Get command
+     *
+     * @return \BackendBundle\Entity\Command
+     */
+    public function getCommand()
+    {
+        return $this->command;
     }
 }

@@ -133,4 +133,27 @@ class CommandController extends Controller
             ->getForm()
         ;
     }
+
+//    /**
+//     * @Route("/sendmail", name="send_mail")
+//     */
+//
+//    public function emailAction($name, \Swift_Mailer $mailer)
+//    {
+//        $name = 'Cyril';
+//
+//        $message = (new \Swift_Message('Ecommerce : Confirmation Commande'))
+//            ->setFrom(array('send@example.com' => 'Ecommerce UPJV')
+//            ->setTo('cy.lenglet@laposte.net')
+//            ->setContentType(''text/html'')
+//            ->setBody($this->renderView('Emails/confirmed_order.html.twig',
+//                    array('name' => $name)
+//                ),
+//            )
+//        ;
+//
+//        $mailer->send($message);
+//
+//        return $this->render('BackendBundle::index.html.twig');
+//    }
 }

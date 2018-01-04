@@ -16,7 +16,7 @@ class CommandType extends AbstractType
         $builder
         ->add('dateCommand')
         ->add('status')
-        ->add('user')
+        ->add('customer')
         ->add('basket');
     }
     

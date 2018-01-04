@@ -36,119 +36,13 @@ class Command
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Customer")
      */
-    private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Basket")
-     */
-    private $basket;
+    private $customer;
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+    public function __toString() {
+        return $this->customer;
     }
 
-    /**
-     * Set dateCommand
-     *
-     * @param \DateTime $dateCommand
-     *
-     * @return Command
-     */
-    public function setDateCommand($dateCommand)
-    {
-        $this->dateCommand = $dateCommand;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCommand
-     *
-     * @return \DateTime
-     */
-    public function getDateCommand()
-    {
-        return $this->dateCommand;
-    }
-
-    /**
-     * Set status
-     *
-     * @param boolean $status
-     *
-     * @return Command
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return bool
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \BackendBundle\Entity\User $user
-     *
-     * @return Command
-     */
-    public function setUser(\BackendBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \BackendBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set basket
-     *
-     * @param \BackendBundle\Entity\Basket $basket
-     *
-     * @return Command
-     */
-    public function setBasket(\BackendBundle\Entity\Basket $basket = null)
-    {
-        $this->basket = $basket;
-
-        return $this;
-    }
-
-    /**
-     * Get basket
-     *
-     * @return \BackendBundle\Entity\Basket
-     */
-    public function getBasket()
-    {
-        return $this->basket;
-    }
 }

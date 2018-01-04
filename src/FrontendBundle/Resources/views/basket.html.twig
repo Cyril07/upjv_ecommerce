@@ -1,0 +1,153 @@
+{% extends 'FrontendBundle:Layout:frontend.html.twig' %}
+
+{% block body %}
+
+<style>
+
+#order_detail_no_register{
+    display: block;
+    color: #2e75b5;
+    font-weight: normal;
+    margin: 30px 30px;
+    height: 300px;
+}
+#order_detail_registration{
+    color: #2e75b5;    
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px
+}
+.jumbotron h1{
+    color: #024d90;
+}
+
+.text-right{
+	color: #024d90;
+}
+
+#_submit{
+    color: #2e75b5;    
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px
+}
+
+#order_detail_div{
+	margin-top: 20px;
+	display: flex;
+    justify-content: center;
+}
+.product-name{
+	color: #024d90;
+}
+.active{
+	visibility: hidden;
+}
+.panel.panel-info{
+	padding: 0px;
+}
+
+#order_detail_null{
+	color: #2e75b5;
+	font-size: 20px;
+	text-align: center;
+	margin: 30px;
+}
+a:hover{	
+	text-decoration:none;
+}
+
+</style>
+
+<div class="container">
+	<div class="row">
+		<div id="order_detail_div">
+			<div class="panel panel-info col-xs-9">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<div class="row">
+							<div class="col-xs-6">
+								<h5><span class="glyphicon glyphicon-shopping-cart"></span> Panier </h5>
+							</div>
+							<div class="col-xs-6">
+								<a href="javascript:history.back()"><button type="button" class="btn btn-primary btn-sm btn-block">
+									<span class="glyphicon glyphicon-share-alt"></span> Continuer vos achats
+								</button></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+				{% if command %}
+				{% for article in articles %}
+
+					<div class="row order_product">
+						<a href="#">
+							<div class="col-xs-2"><img class="img-responsive" src="{{ asset('pictures/no-image.png') }}">
+							</div>
+							<div class="col-xs-4">
+								<h4 class="product-name"><strong>{{ article.wording }}</strong></h4>
+							</div>
+						</a>
+						<div class="col-xs-6">
+							<div class="col-xs-6 text-right">
+								<h6><strong> {{ article.price }} <span class="text-muted">x</span></strong></h6>
+							</div>							
+							<div class="col-xs-4">
+								<input type="number" min= "1" class="form-control input-sm quantity_order_detail" value="{{ basket[article.id] }}" order_detail_id="#" product_id="#">
+							</div>							
+							<div class="col-xs-2">
+								<a href="{{ path('delete', {'id': article.id }) }}">
+									<button type="button" id="delete_product_button" class="btn btn-link btn-xs delete_product" onClick="window.location.reload()">
+										<span class="glyphicon glyphicon-trash"> </span>
+									</button>
+								</a>
+							</div>
+						</div>
+					</div>
+					<hr>
+				
+				{% endfor %}
+
+				{% else %}
+
+					<div id="order_detail_null" class="col-lg-10">
+						<p> Votre panier est vide, cliquer sur <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> pour ajouter un produit à votre panier!
+						</p>
+					</div>
+
+				{% endif %}
+
+				{% if command %}
+				
+					<div class="row">
+						<div class="text-center">				
+							<div class="col-xs-3">
+								<a href="{{  path('deletebasket') }}" ><button  type="button" class="btn btn-default btn-sm btn-block">Suppression du panier</button></a>
+							</div>							
+						</div>
+					</div>
+				</div>
+
+				{#//{% set total (article.prix * basket[article.id]) %}#}
+
+				<div class="panel-footer">
+					<div class="row text-center">
+						<div class="col-xs-8">
+							<h4 class="text-right">Total <strong> <span id="total_price">TODO Somme</span>€</strong></h4>
+						</div>
+						<div class="col-xs-4">
+							<a href="#"><button type="button" class="btn btn-success btn-block">
+								Confirmation commande
+							</button></a>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
