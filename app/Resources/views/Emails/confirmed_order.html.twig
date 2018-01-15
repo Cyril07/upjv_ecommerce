@@ -1,7 +1,78 @@
-<h3>Ecommerce</h3>
 
-Salut ! Votre commande a été expédiée.
+<style>
 
-Merci de nous faire confiance !
+    #confirm_command{
+        color: #024d90;
+    }
+    th, td{
+        text-align: center;
+    }
+    a:hover{
+        text-decoration:none;
+    }
 
-Cordialement,
+</style>
+
+{% set total = 0 %}
+
+<h1 class="text-center"> Validation de votre commande : Ecommerce </h1>
+
+<div>
+
+    Bonjour {{ nom }} {{ fn }}! Votre commande a été enregistrer et sera traitée dans les meilleurs délais.</br>
+    Veuillez trouver ci-dessous un récapitulatif de votre commande.</br>
+
+    Merci de nous faire confiance !</br>
+
+    Cordialement,</br>
+
+</div>
+
+
+<div class="row">
+    <div id="confirm_command" class="col-lg-12">
+        <h1 class="text-center"> Récapitulatif commande</h1>
+
+        <table class="table table-bordered">
+
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Référence</th>
+                <th>Article</th>
+                <th>Quantité</th>
+                <th>Prix unité</th>
+            </tr>
+            </thead>
+
+            {% for  key, article in articles %}
+                <tbody>
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ article.reference }}</td>
+                    <td>{{ article.wording }}</td>
+                    <td>{{ basket[article.id] }}</td>
+                    <td>{{ article.price }} €</td>
+                </tr>
+
+                </tbody>
+                {% set total = total + (article.price * basket[article.id]) %}
+            {% endfor %}
+        </table>
+
+        <table class="table table-bordered">
+
+            <thead>
+            <tr>
+                <th>Prix total</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>{{ total }} €</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>

@@ -1,0 +1,36 @@
+{% extends 'BackendBundle:Layout:backend.html.twig' %}
+
+{% block body %}
+
+<style>
+  .current{
+    color: #083b72;
+  }
+</style>
+
+<div class="col-lg-10">
+
+    <h1>Clients</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Montant total commande</th>
+                <th>Date dernière commande</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for command in commands | sort %}
+            <tr>
+                <td>{{ command.lastname }}</td>
+                <td>{{ command.firstname }}</td>
+                <td>{{ command.email }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

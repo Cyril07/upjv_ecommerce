@@ -25,18 +25,13 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $query = $em->createQuery(
-            'SELECT a
-            FROM BackendBundle:Article a
-            ORDER BY a.id'
-        );
-
+        $query = $em->getRepository('BackendBundle:Article')->paginationNotActive('a.id');
         $paginator = $this->get('knp_paginator');
 
         $articles = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            $request->query->getInt('limit', 1)/*limit per page*/
+            $request->query->getInt('limit', 5)/*limit per page*/
         );
 
         return $this->render('article/index.html.twig', array(

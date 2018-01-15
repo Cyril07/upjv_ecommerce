@@ -5,7 +5,8 @@ namespace BackendBundle\Controller;
 use BackendBundle\Entity\Command;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Command controller.
@@ -28,8 +29,41 @@ class CommandController extends Controller
 
         return $this->render('command/index.html.twig', array(
             'commands' => $commands,
+
         ));
     }
+
+    /**
+     * @Route("/send/{id}", name="send")
+     */
+    public function sendAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $command = $em->getRepository('BackendBundle:Command')->find($id);
+        $command->setStatus(1);
+        $em->persist($command);
+        $em->flush();
+
+        $message = (new \Swift_Message('Ecommerce : Envoie de votre commande'))
+            ->setFrom(array('cy.lenglet@laposte.net' => 'Ecommerce UPJV'))
+            ->setTo($email)
+            ->setContentType('text/html')
+            ->setBody($this->renderView('Emails/send_order.html.twig',
+                array(
+                    'command' => $command,
+                )
+            ));
+
+        $this->get('mailer')->send($message);
+
+
+
+        return $this->redirect($this->generateUrl('command_index'));
+    }
+
+
+
 
     /**
      * Creates a new command entity.
@@ -133,27 +167,4 @@ class CommandController extends Controller
             ->getForm()
         ;
     }
-
-//    /**
-//     * @Route("/sendmail", name="send_mail")
-//     */
-//
-//    public function emailAction($name, \Swift_Mailer $mailer)
-//    {
-//        $name = 'Cyril';
-//
-//        $message = (new \Swift_Message('Ecommerce : Confirmation Commande'))
-//            ->setFrom(array('send@example.com' => 'Ecommerce UPJV')
-//            ->setTo('cy.lenglet@laposte.net')
-//            ->setContentType(''text/html'')
-//            ->setBody($this->renderView('Emails/confirmed_order.html.twig',
-//                    array('name' => $name)
-//                ),
-//            )
-//        ;
-//
-//        $mailer->send($message);
-//
-//        return $this->render('BackendBundle::index.html.twig');
-//    }
 }

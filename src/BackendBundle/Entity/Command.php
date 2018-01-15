@@ -36,14 +36,25 @@ class Command
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Customer")
+     * @var string
+     *
+     * @ORM\Column(name="lastname", type="string", length=255)
      */
-    private $customer;
+    private $lastname;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstname", type="string", length=255)
+     */
+    private $firstname;
 
-    public function __toString() {
-        return $this->customer;
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
 
 
     /**
@@ -105,26 +116,74 @@ class Command
     }
 
     /**
-     * Set customer
+     * Set lastname
      *
-     * @param \BackendBundle\Entity\Customer $customer
+     * @param string $lastname
      *
      * @return Command
      */
-    public function setCustomer(\BackendBundle\Entity\Customer $customer = null)
+    public function setLastname($lastname)
     {
-        $this->customer = $customer;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
     /**
-     * Get customer
+     * Get lastname
      *
-     * @return \BackendBundle\Entity\Customer
+     * @return string
      */
-    public function getCustomer()
+    public function getLastname()
     {
-        return $this->customer;
+        return $this->lastname;
+    }
+
+    /**
+     * Set firstname
+     *
+     * @param string $firstname
+     *
+     * @return Command
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * Get firstname
+     *
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Command
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

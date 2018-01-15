@@ -26,8 +26,12 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
                 <th>Datecommand</th>
-                <th>Status</th>
+                <th>Livré oui/non ?</th>
+
                 <th>Actions</th>
             </tr>
         </thead>
@@ -35,17 +39,18 @@
         {% for command in commands %}
             <tr>
                 <td><a href="{{ path('command_show', { 'id': command.id }) }}">{{ command.id }}</a></td>
+                <td>{{ command.lastname }}</td>
+                <td>{{ command.firstname }}</td>
+                <td>{{ command.email }}</td>
+
                 <td>{% if command.dateCommand %}{{ command.dateCommand|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if command.status %}Yes{% else %}No{% endif %}</td>
+                <td>{% if command.status %}Oui{% else %}Non{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('command_show', { 'id': command.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('command_edit', { 'id': command.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('send', { 'id': command.id }) }}">
+                        <button type="button" class="btn btn-link btn-lg">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </button>
+                    </a>
                 </td>
             </tr>
         {% endfor %}

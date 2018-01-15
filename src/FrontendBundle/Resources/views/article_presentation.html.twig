@@ -68,7 +68,7 @@
 </div>
 
 <div id="list_of_article"class="row">
-	{% for article in articles %}
+	{% for article in articles  %}
 	{% if article.active %}
 			<div id="item_of_article" class="col-lg-3">      
 				<div class="thumbnail">
@@ -134,22 +134,12 @@ $(".filter_select").click(function(){
 
     sucess: function(data) {
       console.log(data);
+      var dataObj = JSON.parse(data);
+      $("#list_of_article").html(dataObj);
     }
   })
 
 });
-
-// panier
-{#$(".add_basket").click(function(){#}
-  {#console.log("ajout au panier de : "+$(this).attr("article_id"));#}
-
-  {#$.ajax({#}
-	  {#url: "{{ path ('add') }}",#}
-	  {#type: "POST",#}
-	  {#data: { article_id: $(this).attr("article_id")}#}
-  {#})#}
-
-{#})#}
 
 </script>
 

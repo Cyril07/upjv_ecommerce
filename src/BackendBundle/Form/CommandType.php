@@ -16,8 +16,9 @@ class CommandType extends AbstractType
         $builder
         ->add('dateCommand')
         ->add('status')
-        ->add('customer')
-        ->add('basket');
+        ->add('lastname')
+        ->add('firstname')
+        ->add('email');
     }
     
     /**
@@ -37,6 +38,5 @@ class CommandType extends AbstractType
     {
         return 'backendbundle_command';
     }
-
 
 }

@@ -22,6 +22,17 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
 
 	}
 
+    public function paginationNotActive($filter)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->select('a')
+            ->orderby($filter);
+        //->addOrderBy($filter);
+
+        return $query;
+
+    }
+
     public function findArray($array)
     {
         $qb = $this->createQueryBuilder('a')

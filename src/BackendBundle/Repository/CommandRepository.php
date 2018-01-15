@@ -10,4 +10,12 @@ namespace BackendBundle\Repository;
  */
 class CommandRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findLast()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->setMaxResults( 1 );
+        $qb->orderBy('c.id', 'DESC');
+
+        return $qb->getQuery()->getSingleResult();
+    }
 }
