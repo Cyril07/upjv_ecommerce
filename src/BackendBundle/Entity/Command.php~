@@ -56,7 +56,14 @@ class Command
      */
     private $email;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="total_command", type="decimal")
+     */
+    private $totalCommand;
 
+    
     /**
      * Get id
      *

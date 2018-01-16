@@ -38,8 +38,9 @@ class Article
     /**
      * @var int
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", scale=2)
      */
+
     private $price;
 
     /**

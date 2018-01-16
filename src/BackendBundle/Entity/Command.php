@@ -56,7 +56,14 @@ class Command
      */
     private $email;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="total_command", type="decimal")
+     */
+    private $totalCommand;
 
+    
     /**
      * Get id
      *
@@ -185,5 +192,29 @@ class Command
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set totalCommand
+     *
+     * @param string $totalCommand
+     *
+     * @return Command
+     */
+    public function setTotalCommand($totalCommand)
+    {
+        $this->totalCommand = $totalCommand;
+
+        return $this;
+    }
+
+    /**
+     * Get totalCommand
+     *
+     * @return string
+     */
+    public function getTotalCommand()
+    {
+        return $this->totalCommand;
     }
 }

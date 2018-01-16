@@ -18,4 +18,22 @@ class CommandRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb->getQuery()->getSingleResult();
     }
+
+    public function pagination($filter)
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('c')
+            ->orderBy($filter);
+
+        return $query;
+    }
+
+    public function paginationClient()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('DISTINCT c.lastname, c.firstname, c.email, c.totalCommand, c.dateCommand');
+
+        return $query;
+    }
+
 }

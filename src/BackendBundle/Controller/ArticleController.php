@@ -16,6 +16,22 @@ use Symfony\Component\HttpFoundation\Request;
 class ArticleController extends Controller
 {
     /**
+     * @Route("/unabled/{id}", name="unabled_article")
+     */
+    public function unabledAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $article = $em->getRepository('BackendBundle:Article')->find($id);
+        $article->setActive(0);
+        $em->persist($article);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('article_index'));
+    }
+
+
+    /**
      * Lists all article entities.
      *
      * @Route("/", name="article_index")

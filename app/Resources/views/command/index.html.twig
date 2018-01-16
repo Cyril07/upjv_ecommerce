@@ -14,11 +14,11 @@
     <h1>Commandes</h1>
 
     <div class="filter_select" > Trier par : 
-        <select id="filter">
-          <option value="a.active = 0">Non livré</option>
-          <option value="a.active = 1">Livré</option>
-          <option value="a.date">Date</option>
-          <option value="a.client">Client</option>
+        <select id="filter" onchange="location = this.value">
+          <option value="{{ path('command_index') }}">Non livré</option>
+          <option value="{{ path('command_status') }}">Livré</option>
+          <option value="{{ path('command_date') }}">Date</option>
+          <option value="{{ path('command_lastname') }}">Client</option>
         </select>
     </div>
 
@@ -29,9 +29,9 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
-                <th>Datecommand</th>
+                <th>Date Commande</th>
+                <th>Montant Commande</th>
                 <th>Livré oui/non ?</th>
-
                 <th>Actions</th>
             </tr>
         </thead>
@@ -42,8 +42,8 @@
                 <td>{{ command.lastname }}</td>
                 <td>{{ command.firstname }}</td>
                 <td>{{ command.email }}</td>
-
                 <td>{% if command.dateCommand %}{{ command.dateCommand|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ command.totalCommand }} €</td>
                 <td>{% if command.status %}Oui{% else %}Non{% endif %}</td>
                 <td>
                     <a href="{{ path('send', { 'id': command.id }) }}">
@@ -56,5 +56,9 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <div class="navigation text-center col-lg-12">
+        {{ knp_pagination_render(commands) }}
+    </div>
 
 {% endblock %}

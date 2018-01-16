@@ -58,16 +58,17 @@
 	<h1>Produits</h1>    
 	<p> Veuillez trouver ci-dessous l'ensemble des produits disponible sur notre site </p>
   <div class="filter_select" > Trier par : 
-    <select id="filter">
-      <option value="a.price">Prix</option>
-      <option value="a.wording">Désignation</option>
-      <option value="a.stock">Disponibilité</option>
+    <select id="filtre" onchange="location = this.value">
+		<option value="">Aucun</option>
+		<option value="{{ path('article_price') }}">Prix</option>
+		<option value="{{ path('article_designation') }}">Désignation</option>
+		<option value="{{ path('article_stock') }}">Disponibilité</option>
     </select>
   </div>
 
 </div>
 
-<div id="list_of_article"class="row">
+<div id="list_of_article" class="row">
 	{% for article in articles  %}
 	{% if article.active %}
 			<div id="item_of_article" class="col-lg-3">      
@@ -119,26 +120,6 @@
 //bulle d'info : product.quantity = 0 : pas de stock
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
-});
-
-//récupération donnée du filtre
-
-$(".filter_select").click(function(){
-  //console.log($("#filter option:selected").attr("value"));
-
-  $.ajax({
-    url: "{{ path('article_presentation') }}",
-    type: "POST",
-    data: { filter: $("#filter option:selected").attr("value")
-    },
-
-    sucess: function(data) {
-      console.log(data);
-      var dataObj = JSON.parse(data);
-      $("#list_of_article").html(dataObj);
-    }
-  })
-
 });
 
 </script>

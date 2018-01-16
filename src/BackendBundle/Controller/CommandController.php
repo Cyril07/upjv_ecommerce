@@ -21,15 +21,88 @@ class CommandController extends Controller
      * @Route("/", name="command_index")
      * @Method("GET")
      */
-    public function indexAction()
+
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $commands = $em->getRepository('BackendBundle:Command')->findAll();
+        $query = $em->getRepository('BackendBundle:Command')->pagination('c.status', 'ASC');
+
+        $paginator = $this->get('knp_paginator');
+
+        $commands = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 10)/*limit per page*/
+        );
 
         return $this->render('command/index.html.twig', array(
             'commands' => $commands,
+        ));
+    }
 
+    /**
+     * @Route("/status", name="command_status")
+     */
+    public function statusOkAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->getRepository('BackendBundle:Command')->pagination('c.status', 'DESC');
+
+        $paginator = $this->get('knp_paginator');
+
+        $commands = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 10)/*limit per page*/
+        );
+
+        return $this->render('command/index.html.twig', array(
+            'commands' => $commands,
+        ));
+    }
+
+    /**
+     * @Route("/date", name="command_date")
+     */
+    public function commandDateAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->getRepository('BackendBundle:Command')->pagination('c.dateCommand', 'DESC');
+
+        $paginator = $this->get('knp_paginator');
+
+        $commands = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 10)/*limit per page*/
+        );
+
+        return $this->render('command/index.html.twig', array(
+            'commands' => $commands,
+        ));
+    }
+
+    /**
+     * @Route("/command/lastname", name="command_lastname")
+     */
+    public function commandLastnameAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository('BackendBundle:Command')->pagination('c.lastname', 'DESC');
+
+        $paginator = $this->get('knp_paginator');
+
+        $commands = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 10)/*limit per page*/
+        );
+
+        return $this->render('command/index.html.twig', array(
+            'commands' => $commands,
         ));
     }
 
@@ -47,7 +120,7 @@ class CommandController extends Controller
 
         $message = (new \Swift_Message('Ecommerce : Envoie de votre commande'))
             ->setFrom(array('cy.lenglet@laposte.net' => 'Ecommerce UPJV'))
-            ->setTo($email)
+            ->setTo($command->getEmail())
             ->setContentType('text/html')
             ->setBody($this->renderView('Emails/send_order.html.twig',
                 array(
@@ -56,8 +129,6 @@ class CommandController extends Controller
             ));
 
         $this->get('mailer')->send($message);
-
-
 
         return $this->redirect($this->generateUrl('command_index'));
     }

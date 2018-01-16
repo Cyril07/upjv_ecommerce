@@ -16,9 +16,8 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ->select('a')
             ->where ('a.active = 1')
             ->orderby($filter);
-            //->addOrderBy($filter);
-    
-    return $query;
+
+        return $query;
 
 	}
 
@@ -27,7 +26,6 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
         $query = $this->createQueryBuilder('a')
             ->select('a')
             ->orderby($filter);
-        //->addOrderBy($filter);
 
         return $query;
 

@@ -18,19 +18,25 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
-                <th>Montant total commande</th>
-                <th>Date dernière commande</th>
+                <th>Montant commande</th>
+                <th>Date commande</th>
             </tr>
         </thead>
         <tbody>
-        {% for command in commands | sort %}
+        {% for command in commands %}
             <tr>
                 <td>{{ command.lastname }}</td>
                 <td>{{ command.firstname }}</td>
                 <td>{{ command.email }}</td>
+                <td> {{ command.totalCommand }} €</td>
+                <td>{% if command.dateCommand %}{{ command.dateCommand|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+    <div class="navigation text-center col-lg-12">
+        {{ knp_pagination_render(commands) }}
+    </div>
 
 {% endblock %}

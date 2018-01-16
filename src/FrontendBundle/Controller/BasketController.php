@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use BackendBundle\Entity\Basket;
 use BackendBundle\Entity\Command;
+use BackendBundle\Entity\Article;
 
 
 class BasketController extends Controller
@@ -90,6 +91,14 @@ class BasketController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $articles = $em->getRepository('BackendBundle:Article')->findArray(array_keys($basket_session));
+        $last_id_command = $em->getRepository('BackendBundle:Command')->findLast();
+
+        $total = 0;
+        foreach ($articles as $article) {
+            $total = $total + $basket_session[$article->getId()] * $article->getPrice();
+        }
+
         if ($nom!=null && $fn!=null && $email!= null) {
             $now = new \DateTime('now');
             $command = new Command();
@@ -98,12 +107,10 @@ class BasketController extends Controller
             $command->setFirstname($fn);
             $command->setEmail($email);
             $command->setStatus(0);
+            $command->setTotalCommand($total);
 
             $em->persist($command);
             $em->flush();
-
-            $articles = $em->getRepository('BackendBundle:Article')->findArray(array_keys($basket_session));
-            $last_id_command = $em->getRepository('BackendBundle:Command')->findLast();
 
             foreach ($articles as $article) {
                 $basket = new Basket();
@@ -112,7 +119,14 @@ class BasketController extends Controller
                 $basket->setCommand($last_id_command);
                 $em->persist($basket);
                 $em->flush();
+
+                $article = $em->getRepository('BackendBundle:Article')->find($article);
+                $quantity = $article->getStock() - ($basket->getQuantity());
+                $article->setStock($quantity);
+                $em->persist($article);
+                $em->flush();
             }
+
             $session->remove('basket');
 
             $message = (new \Swift_Message('Ecommerce : Validation de votre commande'))

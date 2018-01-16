@@ -21,11 +21,19 @@ class ClientController extends Controller
      * @Route("/", name="client_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $commands = $em->getRepository('BackendBundle:Command')->findAll();
+        $query = $em->getRepository('BackendBundle:Command')->paginationClient();
+
+        $paginator = $this->get('knp_paginator');
+
+        $commands = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 10)/*limit per page*/
+        );
 
         return $this->render('client/index.html.twig', array(
             'commands' => $commands,
